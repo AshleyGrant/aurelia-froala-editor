@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aurelia-event-aggregator'], function (_export, _context) {
+System.register(["aurelia-framework", "aurelia-binding", "aurelia-i18n", "aurelia-event-aggregator"], function (_export, _context) {
 	"use strict";
 
-	var customElement, bindable, inject, ObserverLocator, I18N, EventAggregator, _dec, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, FroalaEditor;
+	var customElement, bindable, inject, inlineView, ObserverLocator, I18N, EventAggregator, _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, FroalaEditor;
 
 	function _initDefineProp(target, property, descriptor, context) {
 		if (!descriptor) return;
@@ -59,6 +59,7 @@ System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aureli
 			customElement = _aureliaFramework.customElement;
 			bindable = _aureliaFramework.bindable;
 			inject = _aureliaFramework.inject;
+			inlineView = _aureliaFramework.inlineView;
 		}, function (_aureliaBinding) {
 			ObserverLocator = _aureliaBinding.ObserverLocator;
 		}, function (_aureliaI18n) {
@@ -70,27 +71,21 @@ System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aureli
 
 			customElement('froala-editor');
 
-			_export('FroalaEditor', FroalaEditor = (_dec = inject(Element, ObserverLocator, I18N, EventAggregator), _dec(_class = (_class2 = function () {
+			_export("FroalaEditor", FroalaEditor = (_dec = inlineView('<template><div ref="editorDiv"></div></template>'), _dec2 = inject(Element, I18N, EventAggregator), _dec(_class = _dec2(_class = (_class2 = function () {
 				function FroalaEditor(element, observerLocator, i18n, eventAggregator) {
 					var _this = this;
 
 					_classCallCheck(this, FroalaEditor);
 
-					_initDefineProp(this, 'value', _descriptor, this);
+					_initDefineProp(this, "value", _descriptor, this);
 
-					_initDefineProp(this, 'config', _descriptor2, this);
+					_initDefineProp(this, "config", _descriptor2, this);
 
-					_initDefineProp(this, 'eventHandlers', _descriptor3, this);
+					_initDefineProp(this, "eventHandlers", _descriptor3, this);
 
 					this.i18nInitialized = false;
 
 					this.element = element;
-					this.subscriptions = [observerLocator.getObserver(this, 'value').subscribe(function (newValue, oldValue) {
-						if (_this.instance && _this.instance.froalaEditor('html.get') != newValue) {
-							_this.instance.froalaEditor('html.set', newValue);
-							_this.updateEmptyStatus();
-						}
-					})];
 					this.i18n = i18n;
 					eventAggregator.subscribe('i18n:locale:changed', function (payload) {
 						_this.processLanguageChanged();
@@ -102,10 +97,17 @@ System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aureli
 					this.setupFroala();
 				};
 
+				FroalaEditor.prototype.valueChanged = function valueChanged(newValue) {
+					if (this.instance && this.instance.froalaEditor('html.get') != newValue) {
+						this.instance.froalaEditor('html.set', newValue);
+						this.updateEmptyStatus();
+					}
+				};
+
 				FroalaEditor.prototype.setupFroala = function setupFroala() {
 					var _this2 = this;
 
-					this.instance = $(this.element.getElementsByTagName("div")[0]);
+					this.instance = $(this.editorDiv);
 
 					if (this.instance.data('froala.editor')) {
 						return;
@@ -118,7 +120,7 @@ System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aureli
 					if (this.eventHandlers && this.eventHandlers.length != 0) {
 						var _loop = function _loop(eventHandlerName) {
 							var handler = _this2.eventHandlers[eventHandlerName];
-							_this2.instance.on('froalaEditor.' + eventHandlerName, function () {
+							_this2.instance.on("froalaEditor." + eventHandlerName, function () {
 								var p = arguments;
 								return handler.apply(this, p);
 							});
@@ -128,7 +130,7 @@ System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aureli
 							_loop(eventHandlerName);
 						}
 					}
-					this.instance.on('froalaEditor.contentChanged', function (e, editor) {
+					this.instance.on('froalaEditor.contentChanged,froalaEditor.blur', function (e, editor) {
 						return _this2.value = editor.html.get();
 					});
 				};
@@ -151,22 +153,22 @@ System.register(['aurelia-framework', 'aurelia-binding', 'aurelia-i18n', 'aureli
 				};
 
 				return FroalaEditor;
-			}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'value', [bindable], {
+			}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "value", [bindable], {
 				enumerable: true,
 				initializer: null
-			}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'config', [bindable], {
+			}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "config", [bindable], {
 				enumerable: true,
 				initializer: function initializer() {
 					return {};
 				}
-			}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'eventHandlers', [bindable], {
+			}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "eventHandlers", [bindable], {
 				enumerable: true,
 				initializer: function initializer() {
 					return {};
 				}
-			})), _class2)) || _class));
+			})), _class2)) || _class) || _class));
 
-			_export('FroalaEditor', FroalaEditor);
+			_export("FroalaEditor", FroalaEditor);
 		}
 	};
 });
