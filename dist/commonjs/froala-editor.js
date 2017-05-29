@@ -62,7 +62,7 @@ function _initializerWarningHelper(descriptor, context) {
 
 (0, _aureliaFramework.customElement)('froala-editor');
 var FroalaEditor = exports.FroalaEditor = (_dec = (0, _aureliaFramework.inlineView)('<template><div ref="editorDiv"></div></template>'), _dec2 = (0, _aureliaFramework.inject)(Element, _aureliaI18n.I18N, _aureliaEventAggregator.EventAggregator), _dec(_class = _dec2(_class = (_class2 = function () {
-	function FroalaEditor(element, observerLocator, i18n, eventAggregator) {
+	function FroalaEditor(element, i18n, eventAggregator) {
 		var _this = this;
 
 		_classCallCheck(this, FroalaEditor);

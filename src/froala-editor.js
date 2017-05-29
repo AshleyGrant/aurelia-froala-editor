@@ -16,7 +16,7 @@ export class FroalaEditor {
 	i18n;
 	i18nInitialized = false;
 
-	constructor(element, observerLocator, i18n, eventAggregator) {
+	constructor(element, i18n, eventAggregator) {
 		this.element = element;
 		this.i18n = i18n;
 		eventAggregator.subscribe('i18n:locale:changed', payload => {

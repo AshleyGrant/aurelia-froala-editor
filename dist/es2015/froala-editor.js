@@ -52,7 +52,7 @@ customElement('froala-editor');
 
 export let FroalaEditor = (_dec = inlineView('<template><div ref="editorDiv"></div></template>'), _dec2 = inject(Element, I18N, EventAggregator), _dec(_class = _dec2(_class = (_class2 = class FroalaEditor {
 
-	constructor(element, observerLocator, i18n, eventAggregator) {
+	constructor(element, i18n, eventAggregator) {
 		_initDefineProp(this, "value", _descriptor, this);
 
 		_initDefineProp(this, "config", _descriptor2, this);

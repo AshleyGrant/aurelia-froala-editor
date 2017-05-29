@@ -72,7 +72,7 @@ System.register(["aurelia-framework", "aurelia-binding", "aurelia-i18n", "aureli
 			customElement('froala-editor');
 
 			_export("FroalaEditor", FroalaEditor = (_dec = inlineView('<template><div ref="editorDiv"></div></template>'), _dec2 = inject(Element, I18N, EventAggregator), _dec(_class = _dec2(_class = (_class2 = function () {
-				function FroalaEditor(element, observerLocator, i18n, eventAggregator) {
+				function FroalaEditor(element, i18n, eventAggregator) {
 					var _this = this;
 
 					_classCallCheck(this, FroalaEditor);
